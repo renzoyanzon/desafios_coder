@@ -1,7 +1,7 @@
 const authMiddleware = (req,res,next)=>{
     if(req.session.username && req.session.isAuth){
-        console.log(req.session.username)
-        next();
+
+        return next();
     } 
     
     res.redirect('/signin');
