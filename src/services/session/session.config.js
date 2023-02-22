@@ -9,7 +9,7 @@ const getStoreConfig = ()=>{
     const MONGO_URI = process.env.MONGO_URI || ' mongodb://localhost:27017/clase25';
     return{
         mongoUrl: MONGO_URI,
-        ttl: 3600,
+        ttl: 600,
         mongoOptions: getMongoConfig()
     }
 }
