@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/renzoyanzon/desafios_coder#readme",
   "dependencies": {
+    "child_process": "^1.0.2",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
@@ -26,7 +27,9 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "http-status": "^1.6.2",
+    "lodash": "^4.17.21",
     "md5": "^2.3.0",
+    "minimist": "^1.2.8",
     "mongoose": "^6.9.2",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
