@@ -4,7 +4,7 @@ const { isNil } =require('lodash')
 
 router.get('/:num', async (req,res)=>{
     
-    const params = req.params.num ;
+    const params = req.query ;
     if(isNil(params)){
         params = 100000000
     }
