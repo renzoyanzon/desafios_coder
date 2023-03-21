@@ -6,8 +6,7 @@ router.get('/', async (req,res)=>{
     
     let {params} = req.query
 
-    
-    const params = req.params.num ;
+ 
     if(isNil(params)){
         params = 100000000
     }
