@@ -1,12 +1,13 @@
 const express =  require('express');
 const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 const session = require('express-session');
 const { getStoreConfig }= require('./src/services/session/session.config');
 const indexRouter = require('./src/routes/index');
 
 const mongooseConnect = require('./src/services/mongo/connect')
-const logger = require('morgan');
+const endPointLogger = require('morgan');
 
 require('dotenv').config();
 
@@ -17,9 +18,11 @@ const md5 =require('md5');
 
 const app = express();
 
+
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(logger('tiny'))
+app.use(endPointLogger('tiny'))
 
 mongooseConnect();
 
