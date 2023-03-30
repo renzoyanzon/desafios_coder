@@ -37,7 +37,8 @@
     "passport-local": "^1.0.0",
     "pino": "^8.11.0",
     "pino-http": "^8.3.3",
-    "pino-pretty": "^9.2.0"
+    "pino-pretty": "^9.2.0",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

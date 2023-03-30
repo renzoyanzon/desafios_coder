@@ -1,15 +1,11 @@
 const app = require('./app');
+require('dotenv').config();
 
-const appLogger = require('pino')(
-    {
-        transport: {
-            target: 'pino-pretty',
-            options: {
-                colorize: true
-            }
-        },
-    }
-);
+const {loggerDev, loggerProd} = require('./src/services/logger/index')
+
+const logger = process.env.ENVIRONMENT == "development" 
+    ? loggerDev
+    : loggerProd
 
 
 const cluster= require('cluster');
@@ -27,12 +23,12 @@ if(mode=='CLUSTER'){
         }
     
         cluster.on("exit",()=>{
-            appLogger.warn(`Process ${process.pid} died`)
+            logger.log("warn",`Process ${process.pid} died`)
         })
     }else{
-        app.listen(PORT,()=> appLogger.info(`Server up and runnin on port ${PORT} and port running on process ${process.pid}`))
+        app.listen(PORT,()=> logger.log("info",`Server up and runnin on port ${PORT} and port running on process ${process.pid}`))
     
     }
 } else{
-    app.listen(PORT,()=> appLogger.info(`Server up and runnin on port ${PORT} and port running on process ${process.pid}`))
+    app.listen(PORT,()=> logger.log("info",`Server up and runnin on port ${PORT} and port running on process ${process.pid}`))
 }

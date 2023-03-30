@@ -1,14 +1,33 @@
-const pino = require('pino');
+const {createLogger, format, transports} = require('winston');
 
-const logger = pino({
-
-    transport: {
-        target: 'pino-pretty',
-        options: {
-          colorize: true
-        }
-    }
+const loggerDev = createLogger({
+    
+    format: format.combine(format.simple()),
+    transports: [
+        new transports.Console({
+            level: "info"
+        })
+    ]
 });
 
 
-module.exports = { logger };
+const loggerProd = createLogger({
+  
+    format: format.combine(format.simple()),
+    transports: [
+        new transports.File({
+            filename: "debug.log",
+            level: "debug"
+        }),
+        new transports.File({
+            filename: "error.log",
+            level: "error"
+        })
+    ]
+}); 
+
+
+module.exports = {
+  loggerDev,
+  loggerProd
+}

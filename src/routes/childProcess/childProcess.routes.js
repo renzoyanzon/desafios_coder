@@ -10,7 +10,7 @@ router.get('/', async (req,res)=>{
     if(isNil(params)){
         params = 100000000
     }
-    console.log(params)
+    
 
     const comp = fork('./src/services/childProcess/childProcess.services.js');
     comp.send({action: "start", valor: params});
