@@ -4,7 +4,8 @@
   "description": "��#\u0000 \u0000d\u0000e\u0000s\u0000a\u0000f\u0000i\u0000o\u0000s\u0000_\u0000c\u0000o\u0000d\u0000e\u0000r\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "test": "node benchmark.js",
+    "start": "0x server.js",
     "start:dev": "nodemon server.js"
   },
   "repository": {
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/renzoyanzon/desafios_coder#readme",
   "dependencies": {
+    "autocannon": "^7.10.0",
     "child_process": "^1.0.2",
     "compression": "^1.7.4",
     "connect-mongo": "^4.6.0",
