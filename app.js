@@ -11,10 +11,7 @@ const endPointLogger = require('morgan');
 
 require('dotenv').config();
 
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const UserModel = require('./src/services/mongo/user.model');
-const md5 =require('md5');
+
 
 const app = express();
 
@@ -37,45 +34,12 @@ app.use(session({
 }))
 
 app.set('view engine','ejs');
-app.set('views','./views');
+app.set('views','./views/pages');
 
-//seteamos la configuracion de passport
-passport.use('login', new LocalStrategy(async (username,password,done)=>{
-    const userData = await UserModel.findOne({username,password:md5(password)});
-    if(!userData){
-        return done(null,false);
-    }
-    done(null, userData)
-}));
+const passportService= require('./src/services/passport/passport.services')
 
-passport.use('signup', new LocalStrategy({
-    passReqToCallback: true
-}, async (req,username,password,done)=>{
-    const userData = await UserModel.findOne({username,password:md5(password)});
-    if(userData){
-        return done(null,false)
-    }
-    const stageUser = new UserModel({
-        username,
-        password: md5(password),
-        fullname: req.body.fullname
-    });
-    const newUser = await stageUser.save();
-    done(null,newUser)
-}
-));
-
-passport.serializeUser((user,done)=>{
-    done(null,user._id);
-});
-
-passport.deserializeUser(async (id,done)=>{
-    const userData = await UserModel.findById(id);
-    done(null,userData);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passportService.initialize());
+app.use(passportService.session());
 
 app.use(indexRouter);
 
