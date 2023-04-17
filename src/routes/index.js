@@ -4,7 +4,8 @@ const router = express.Router();
 const pagesRouter = require('./pages/pages.routes');
 const sessionRouter= require('./session/session.routes');
 const infoRouter= require('./info/info.routes');
-const childProcessRouter = require('./childProcess/childProcess.routes')
+const childProcessRouter = require('./childProcess/childProcess.routes');
+const productsRouter = require('./products/products.routes')
 
 router.get('/health',(_req,res)=>{
     res.status(200).json({
@@ -17,6 +18,7 @@ router.get('/health',(_req,res)=>{
 .use('/api', sessionRouter)
 .use('/info',infoRouter)
 .use('/random',childProcessRouter)
+.use('/api/products',productsRouter)
 
 
 
